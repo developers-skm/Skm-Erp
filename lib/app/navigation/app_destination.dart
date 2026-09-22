@@ -32,10 +32,28 @@ enum AppDestination {
     selectedIcon: Icons.medication_rounded,
     group: AppDestinationGroup.services,
   ),
-  eggsTransfer(
-    label: 'Eggs Transfer',
+  shedTransfer(
+    label: 'Shed Transfer',
     icon: Icons.swap_horiz_rounded,
     selectedIcon: Icons.swap_horiz_rounded,
+    group: AppDestinationGroup.services,
+  ),
+  eggDispatch(
+    label: 'Egg Dispatch',
+    icon: Icons.local_shipping_outlined,
+    selectedIcon: Icons.local_shipping_rounded,
+    group: AppDestinationGroup.services,
+  ),
+  antibiotic(
+    label: 'Antibiotic',
+    icon: Icons.health_and_safety_outlined,
+    selectedIcon: Icons.health_and_safety_rounded,
+    group: AppDestinationGroup.services,
+  ),
+  birdsSales(
+    label: 'Birds Sales',
+    icon: Icons.sell_outlined,
+    selectedIcon: Icons.sell_rounded,
     group: AppDestinationGroup.services,
   ),
   eggSale(

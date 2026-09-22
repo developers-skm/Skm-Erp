@@ -119,7 +119,7 @@ class _DrawerHeader extends StatelessWidget {
         children: [
           Row(
             children: [
-              const SkmEggLogo(size: 44),
+              const SkmSidebarLogo(size: 44),
               const SizedBox(width: AppSpacing.sm),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

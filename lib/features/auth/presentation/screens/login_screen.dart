@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
-import '../../../../core/constants/app_strings.dart';
 import '../../../../core/widgets/widgets.dart';
 import '../../application/auth_providers.dart';
 import '../widgets/skm_egg_logo.dart';
@@ -63,21 +61,14 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const SizedBox(height: AppSpacing.xl),
-                    const Center(child: SkmEggLogo()),
                     const SizedBox(height: AppSpacing.lg),
-                    Text(
-                      AppStrings.appName,
-                      textAlign: TextAlign.center,
-                      style: theme.textTheme.headlineMedium,
+                    const Center(
+                      child: SkmEggLogo(
+                        width: 300,
+                        height: 80,
+                      ),
                     ),
-                    const SizedBox(height: AppSpacing.xs),
-                    Text(
-                      AppStrings.tagline,
-                      textAlign: TextAlign.center,
-                      style: theme.textTheme.bodyMedium,
-                    ),
-                    const SizedBox(height: AppSpacing.xxl),
+                    const SizedBox(height: AppSpacing.xl),
                     Text('Welcome Back', style: theme.textTheme.titleLarge),
                     const SizedBox(height: AppSpacing.xs),
                     Text(
@@ -146,12 +137,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       onPressed: _submit,
                       icon: Icons.login_rounded,
                     ),
-
-                    const SizedBox(height: AppSpacing.xl),
-                    const _ConnectivityNotice(),
-
-                    const SizedBox(height: AppSpacing.lg),
-                    const _DemoCredentialsBanner(),
                   ],
                 ),
               ),
@@ -246,62 +231,6 @@ class _InlineError extends StatelessWidget {
               style: theme.textTheme.bodySmall?.copyWith(
                 color: theme.colorScheme.error,
               ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-/// Shows basic server-reachability context near the sign-in action.
-/// Actual connectivity detection will be added with the sync engine —
-/// this is a static placeholder to reserve the UI space/behavior.
-class _ConnectivityNotice extends StatelessWidget {
-  const _ConnectivityNotice();
-
-  @override
-  Widget build(BuildContext context) {
-    final colors =
-        Theme.of(context).extension<AppStatusColors>() ??
-        AppStatusColors.standard;
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(Icons.circle, size: 8, color: colors.success),
-        const SizedBox(width: AppSpacing.xs),
-        Text('Server reachable', style: Theme.of(context).textTheme.bodySmall),
-      ],
-    );
-  }
-}
-
-class _DemoCredentialsBanner extends StatelessWidget {
-  const _DemoCredentialsBanner();
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Container(
-      padding: const EdgeInsets.all(AppSpacing.md),
-      decoration: BoxDecoration(
-        color: theme.colorScheme.secondaryContainer.withValues(alpha: 0.35),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Icon(
-            Icons.info_outline_rounded,
-            size: 18,
-            color: theme.colorScheme.secondary,
-          ),
-          const SizedBox(width: AppSpacing.sm),
-          Expanded(
-            child: Text(
-              'Temporary demo login (Phase 1 UI testing only)\n'
-              'Username: admin   •   Password: Admin@123',
-              style: theme.textTheme.bodySmall,
             ),
           ),
         ],

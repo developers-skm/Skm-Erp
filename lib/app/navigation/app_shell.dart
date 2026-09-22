@@ -5,8 +5,6 @@ import '../theme/app_colors.dart';
 import '../../core/constants/app_breakpoints.dart';
 import '../../core/constants/sample_data.dart';
 import '../../core/sync/sync_status.dart';
-import '../../core/widgets/icon_badge.dart';
-import '../../core/widgets/sync_status_chip.dart';
 import '../../features/disease/presentation/screens/disease_screen.dart';
 import '../../features/egg_sales/presentation/screens/egg_sale_screen.dart';
 import '../../features/egg_stock/presentation/screens/eggs_transfer_screen.dart';
@@ -20,6 +18,7 @@ import '../../features/reports/presentation/screens/reports_screen.dart';
 import '../../features/sync/presentation/screens/sync_status_screen.dart';
 import '../../features/dashboard/presentation/screens/dashboard_screen.dart';
 import '../../features/profile/presentation/screens/profile_screen.dart';
+import '../../core/widgets/widgets.dart';
 import 'app_destination.dart';
 import 'app_destination_provider.dart';
 import 'skm_nav_drawer.dart';
@@ -114,8 +113,23 @@ class _AppShellState extends ConsumerState<AppShell> {
         return const FeedsEggsScreen();
       case AppDestination.medicineVaccine:
         return const MedicineVaccineScreen();
-      case AppDestination.eggsTransfer:
+      case AppDestination.shedTransfer:
         return const EggsTransferScreen();
+      case AppDestination.eggDispatch:
+        return const ServicePlaceholderScreen(
+          title: 'Egg Dispatch',
+          icon: Icons.local_shipping_outlined,
+        );
+      case AppDestination.antibiotic:
+        return const ServicePlaceholderScreen(
+          title: 'Antibiotic',
+          icon: Icons.health_and_safety_outlined,
+        );
+      case AppDestination.birdsSales:
+        return const ServicePlaceholderScreen(
+          title: 'Birds Sales',
+          icon: Icons.sell_outlined,
+        );
       case AppDestination.eggSale:
         return const EggSaleScreen();
       case AppDestination.disease:

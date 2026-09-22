@@ -28,7 +28,7 @@ class EggsTransferScreen extends StatelessWidget {
                 color: theme.colorScheme.outline,
               ),
               const SizedBox(height: AppSpacing.md),
-              Text('Eggs Transfer', style: theme.textTheme.titleLarge),
+              Text('Shed Transfer', style: theme.textTheme.titleLarge),
               const SizedBox(height: AppSpacing.xs),
               Text(
                 'This service is reserved and reachable from navigation.\n'

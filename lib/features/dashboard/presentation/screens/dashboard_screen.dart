@@ -12,6 +12,7 @@ import '../../../../core/utils/number_format_utils.dart';
 import '../../../../core/widgets/widgets.dart';
 import '../../data/dashboard_sample_data.dart';
 import '../widgets/dashboard_header.dart';
+import '../widgets/dashboard_skeleton.dart';
 import '../widgets/production_trend_card.dart';
 import '../widgets/recent_activity_list.dart';
 import '../widgets/todays_summary_card.dart';
@@ -35,6 +36,18 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
   SampleFarm _selectedFarm = sampleFarms.first;
   SampleFlock _selectedFlock = sampleFlocks.first;
   DateTime _selectedDate = DateTime.now();
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    // Simulated first-load latency — stands in for the real repository
+    // fetch once the API is wired up, so the skeleton has something to
+    // show. Remove this delay once dashboardDataProvider does real I/O.
+    Future.delayed(const Duration(milliseconds: 900), () {
+      if (mounted) setState(() => _isLoading = false);
+    });
+  }
 
   bool get _isYesterdaySelected {
     final yesterday = DateTime.now().subtract(const Duration(days: 1));
@@ -63,6 +76,13 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
+    return AnimatedSwitcher(
+      duration: const Duration(milliseconds: 350),
+      child: _isLoading ? const DashboardSkeleton() : _buildContent(context),
+    );
+  }
+
+  Widget _buildContent(BuildContext context) {
     final data = _isYesterdaySelected
         ? sampleDashboardDataYesterday
         : sampleDashboardData;
@@ -309,7 +329,18 @@ class _QuickActionsGrid extends ConsumerWidget {
         Icons.medication_outlined,
         AppDestination.medicineVaccine,
       ),
-      ('Egg Transfer', Icons.swap_horiz_rounded, AppDestination.eggsTransfer),
+      ('Shed Transfer', Icons.swap_horiz_rounded, AppDestination.shedTransfer),
+      (
+        'Egg Dispatch',
+        Icons.local_shipping_outlined,
+        AppDestination.eggDispatch,
+      ),
+      (
+        'Antibiotic',
+        Icons.health_and_safety_outlined,
+        AppDestination.antibiotic,
+      ),
+      ('Birds Sales', Icons.sell_outlined, AppDestination.birdsSales),
       ('Egg Sale', Icons.point_of_sale_outlined, AppDestination.eggSale),
       ('Disease', Icons.coronavirus_outlined, AppDestination.disease),
     ];

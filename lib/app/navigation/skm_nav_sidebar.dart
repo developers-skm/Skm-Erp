@@ -40,7 +40,7 @@ class SkmNavSidebar extends StatelessWidget {
               padding: const EdgeInsets.all(AppSpacing.lg),
               child: Row(
                 children: [
-                  const SkmEggLogo(size: 40),
+                  const SkmSidebarLogo(size: 40),
                   const SizedBox(width: AppSpacing.sm),
                   Expanded(
                     child: Column(

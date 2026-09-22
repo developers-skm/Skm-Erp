@@ -1,34 +1,78 @@
 import 'package:flutter/material.dart';
 
-/// Original SKM Egg mark — a simple abstract egg-in-shield motif rendered
-/// purely in code (no external/copied assets).
+import '../../../../core/constants/app_assets.dart';
+
+/// Main SKM brand logo used on login, splash, and about screens.
+/// Displays the new logo from [AppAssets.skmLogoNew].
 class SkmEggLogo extends StatelessWidget {
-  const SkmEggLogo({super.key, this.size = 88});
+  const SkmEggLogo({
+    super.key,
+    this.size = 110,
+    this.height,
+    this.width,
+    this.fit = BoxFit.contain,
+  });
 
   final double size;
+  final double? height;
+  final double? width;
+  final BoxFit fit;
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-
-    return Container(
-      width: size,
-      height: size,
-      decoration: BoxDecoration(
-        color: colorScheme.primary,
-        borderRadius: BorderRadius.circular(size * 0.28),
+    final effectiveHeight = height ?? size;
+    return Image.asset(
+      AppAssets.skmLogoNew,
+      height: effectiveHeight,
+      width: width,
+      fit: fit,
+      errorBuilder: (context, error, stackTrace) => Container(
+        height: effectiveHeight,
+        width: width ?? effectiveHeight,
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.primaryContainer,
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Icon(
+          Icons.egg_rounded,
+          size: effectiveHeight * 0.5,
+          color: Theme.of(context).colorScheme.primary,
+        ),
       ),
-      child: Center(
-        child: Container(
-          width: size * 0.46,
-          height: size * 0.6,
-          decoration: BoxDecoration(
-            color: colorScheme.secondary,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(size * 0.23),
-              topRight: Radius.circular(size * 0.23),
-              bottomLeft: Radius.circular(size * 0.3),
-              bottomRight: Radius.circular(size * 0.3),
+    );
+  }
+}
+
+/// Compact SKM favicon logo used in the sidebar navigation header and drawer.
+/// Displays [AppAssets.favicon].
+class SkmSidebarLogo extends StatelessWidget {
+  const SkmSidebarLogo({
+    super.key,
+    this.size = 40,
+    this.borderRadius = 8.0,
+  });
+
+  final double size;
+  final double borderRadius;
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(borderRadius),
+      child: Image.asset(
+        AppAssets.favicon,
+        width: size,
+        height: size,
+        fit: BoxFit.cover,
+        errorBuilder: (context, error, stackTrace) => CircleAvatar(
+          radius: size / 2,
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          child: Text(
+            'SKM',
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.onPrimary,
+              fontSize: size * 0.35,
+              fontWeight: FontWeight.bold,
             ),
           ),
         ),
